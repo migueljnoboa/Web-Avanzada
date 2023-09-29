@@ -22,39 +22,35 @@ public class InicioController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String inicio(Model model){
 
-        model = getModel(model);
+        model = getModelInicio(model);
 
         return "inicio";
     }
 
     @PostMapping("/agregar")
-    public String crearNombre(@RequestBody String nombre, Model model){
+    public String crearNombre(@RequestBody String nombre){
         String[] str = nombre.split("=", 2);
         if(!str[1].equalsIgnoreCase("")){
             nombreService.addNombre(str[1]);
         }
-        model = getModel(model);
-        return "/";
+        return "redirect:/";
     }
 
     @PostMapping("/edit/{id}")
-    public String editNombre(@RequestBody String editNombre, @PathVariable Integer id, Model model){
+    public String editNombre(@RequestBody String editNombre, @PathVariable Integer id){
         String[] str = editNombre.split("=", 2);
         Nombre n = new Nombre(id, str[1]);
         nombreService.editNombre(n);
-        model = getModel(model);
-        return "/";
+        return "redirect:/";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteNombre(@PathVariable String id, Model model){
-        System.out.println(id);
+    public String deleteNombre(@PathVariable String id){
         nombreService.deleteNombre(Integer.parseInt(id));
-        model = getModel(model);
-        return "/";
+        return "redirect:/";
     }
 
-    private Model getModel(Model model){
+    private Model getModelInicio(Model model){
         model.addAttribute("nombres", nombreService.getNombre());
         return model;
     }

@@ -23,23 +23,29 @@ public class NombreService {
     public void addNombre(String text){
         Nombre n = new Nombre(generateId(), text);
         nombreRepository.save(n);
+        System.out.printf("Adding New Nombre -> text: %s\n",text);
     }
 
     public List<Nombre> getNombre(){
         List<Nombre> nombres = new ArrayList<>();
         nombreRepository.findAll().forEach(nombre -> nombres.add(nombre));
+        System.out.print("Retrieving List of Nombres\n");
         return nombres;
     }
 
     public Nombre getNombre(long id){
-        return nombreRepository.findById(id).get();
+        Nombre n = nombreRepository.findById(id).get();
+        System.out.printf("Retriving Nombre -> id: %d\n", id);
+        return n;
     }
 
     public void deleteNombre(long id){
         nombreRepository.deleteById(id);
+        System.out.printf("Deleted Nombre -> id: %d\n", id);
     }
 
     public void editNombre(Nombre nombre){
+        System.out.printf("Updated Nombre -> id: %s, text: %s\n",nombre.getId(), nombre.getText());
         nombreRepository.save(nombre);
     }
 
