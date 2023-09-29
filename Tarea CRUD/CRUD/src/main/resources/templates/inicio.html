@@ -37,7 +37,7 @@
                         <td class="table-striped-columns" th:text="${n.getId()}">Id</td>
                         <td>
                             <form class="form-floating" method="post" th:action="${n.getEditPath()}" id="editForm">
-                                <input type="text" id="editNombre" name="edit" th:value="${n.getNombre()}">
+                                <input type="text" id="editNombre" name="edit" th:value="${n.getText()}">
                             </form>
                         </td>
                         <td>
