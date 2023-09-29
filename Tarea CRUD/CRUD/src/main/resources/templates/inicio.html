@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="bs-theme-overrides.css">
+</head>
+
+<body>
+<div>
+    <form class="form-floating" method="post" action="/agregar">
+
+        <button class="btn btn-primary mx-5 my-3" type="submit">Agregar</button>
+
+        <label for="inputNombre"></label>
+        <input type="text" class="mx-3" id="inputNombre" name="nombre" placeholder="Insertar Nombre" value="">
+
+    </form>
+
+</div>
+
+    <div class="table-responsive table-striped-columns mx-5 table-bordered">
+        <table class="table">
+            <thead>
+            <tr class="table-info">
+                <th class="table-bordered col-2">Id</th>
+                <th class="col-8">Nombre</th>
+                <th>Botones</th>
+            </tr>
+            </thead>
+            <tbody>
+                <div th:each="n : ${nombres}">
+                    <tr>
+                        <td class="table-striped-columns" th:text="${n.getId()}">Id</td>
+                        <td>
+                            <form class="form-floating" method="post" th:action="${n.getEditPath()}" id="editForm">
+                                <input type="text" id="editNombre" name="edit" th:value="${n.getNombre()}">
+                            </form>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary mx-1" type="submit" form="editForm">Edit</button>
+                            <a th:href="${n.getDelete()}">
+                                <button class="btn btn-primary btn-danger" type="button" style="margin-right: 5px;margin-left: 5px;">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                </div>
+
+            </tbody>
+        </table>
+    </div>
+    <script src=" bootstrap.min.js"></script>
+</body>
+
+</html>
