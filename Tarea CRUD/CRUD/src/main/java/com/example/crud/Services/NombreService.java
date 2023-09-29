@@ -45,6 +45,10 @@ public class NombreService {
     }
 
     public void editNombre(Nombre nombre){
+        if(nombre.getText().equalsIgnoreCase("")){
+            System.out.printf("Failed to Update Nombre, empty text -> id: %s\n",nombre.getId());
+            return;
+        }
         System.out.printf("Updated Nombre -> id: %s, text: %s\n",nombre.getId(), nombre.getText());
         nombreRepository.save(nombre);
     }
